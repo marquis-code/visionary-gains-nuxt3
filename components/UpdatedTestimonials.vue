@@ -30,36 +30,53 @@
 </template>
 
 <script setup lang="ts">
-  const activeTestimonyIndex = ref(0) as any
-      const timer = ref(0) as any
-      const testimonials = ref([
-        {
-          description: 'Very easy to use. I could probably go into sales for you. I love your system. Just what I was looking for.',
-          user: 'Junjie Liu',
-          position: 'Australia'
-        },
-        {
-          description: 'Financial stability was a challenge until Visionary Gains . I think everyone show try them! ',
-          user: 'Austin Jenkins',
-          position: 'Virginia'
-        },
-        {
-          description: 'Frankly speaking, I sleep better at night knowing that my finances are getting better with Visionary Gains. ',
-          user: 'Joseph',
-          position: 'London'
-        }
-      ]) as any
+import { ref, onMounted, onUnmounted } from 'vue';
 
-    //   const startSlider = () => {
-    //   timer.value = setInterval(next.value, 5000)
-    // }
-    const next = () => {
-      activeTestimonyIndex.value += 1
-      if (activeTestimonyIndex.value === 3) {
-        activeTestimonyIndex.value = 0
-      }
-    }
-    const previous = () => {
-      activeTestimonyIndex.value -= 1
-    }
+const activeTestimonyIndex = ref(0);
+let timer: number | undefined;
+const testimonials = ref([
+  {
+    description: 'Very easy to use. I could probably go into sales for you. I love your system. Just what I was looking for.',
+    user: 'Junjie Liu',
+    position: 'Australia'
+  },
+  {
+    description: 'Financial stability was a challenge until Visionary Gains. I think everyone should try them!',
+    user: 'Austin Jenkins',
+    position: 'Virginia'
+  },
+  {
+    description: 'Frankly speaking, I sleep better at night knowing that my finances are getting better with Visionary Gains.',
+    user: 'Joseph',
+    position: 'London'
+  }
+]);
+
+const startSlider = () => {
+  timer = setInterval(() => {
+    next();
+  }, 5000);
+};
+
+const next = () => {
+  activeTestimonyIndex.value += 1;
+  if (activeTestimonyIndex.value === testimonials.value.length) {
+    activeTestimonyIndex.value = 0;
+  }
+};
+
+const previous = () => {
+  activeTestimonyIndex.value -= 1;
+  if (activeTestimonyIndex.value < 0) {
+    activeTestimonyIndex.value = testimonials.value.length - 1;
+  }
+};
+
+onMounted(() => {
+  startSlider();
+});
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
 </script>

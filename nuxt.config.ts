@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     },
   },
   plugins: ["~/plugins/aos.client.ts"],
+  nitro: {
+    prerender: {
+      routes: [
+        '/',
+        '/admin/dashboard',
+      ],
+    },
+  },
   modules: ['@kevinmarrec/nuxt-pwa'],
   pwa: {
     workbox: {

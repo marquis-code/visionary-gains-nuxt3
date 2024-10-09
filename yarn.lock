@@ -287,6 +287,11 @@
   dependencies:
     mime "^3.0.0"
 
+"@diracleo/vue-enlargeable-image@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@diracleo/vue-enlargeable-image/-/vue-enlargeable-image-0.0.7.tgz#d1b9d9519effebb868c3840188a4d867e1507977"
+  integrity sha512-nwrDbNQPDptwj4QRUdhvCwOfHW3ZLitaCZfjx7i+OsF1LiVcbHCgikbzrkORqCXSY3caCu+gPftElNXk37cwoQ==
+
 "@esbuild/android-arm64@0.18.20":
   version "0.18.20"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.18.20.tgz#984b4f9c8d0377443cc2dfcef266d02244593622"
@@ -4344,6 +4349,11 @@ svgo@^3.0.2:
     css-tree "^2.2.1"
     csso "^5.0.5"
     picocolors "^1.0.0"
+
+sweetalert2@^11.14.2:
+  version "11.14.2"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.14.2.tgz#6300b220cbfe7a527edb311bc90f5a95fc2987e7"
+  integrity sha512-ZJcnp+akKLFDdwTJkayZCMWfdEOxxchInuJ8gz/Xlx/nrdTfAM3Sb+NBbBNdqcfXn0h1CamN+VKDxjP8xbWqrg==
 
 tailwindcss@^3.3.3:
   version "3.3.3"
