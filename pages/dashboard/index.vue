@@ -32,7 +32,7 @@
               </div>
               <div class="border-t-[0.4px] border-white">
                 <div class="px-3 py-2">
-                  <p class="text-white text-xs">
+                  <p class="text-white text-sm">
                     Profits
                   </p>
                   <p class="text-lg font-semibold text-white">
@@ -50,7 +50,7 @@
               </div>
               <div class="border-t-[0.4px] border-white">
                 <div class="px-3 py-2">
-                  <p class="text-white text-xs">
+                  <p class="text-white text-sm">
                     Trading
                   </p>
                   <p class="text-lg font-semibold text-white">
@@ -61,12 +61,12 @@
             </div>
           </div>
           <div class=" bg-white py-10 space-y-4 border border-gray-600 h-[400px] overflow-y-auto">
-            <h1 class="text-gray-600 font-bold border-b pb-4 pl-6">
+            <p class="text-gray-600 font-bold border-b pb-4 pl-6">
               Recent Transactions
-            </h1>
+            </p>
             <div v-if="!loadingTransactions && transactionsList" class="text-gray-100 w-full p-3 rounded-lg">
               <div class="overflow-x-auto w-full">
-                <table class="w-full text-xs">
+                <table class="w-full text-sm">
                   <colgroup>
                     <col>
                     <col>
@@ -266,11 +266,8 @@ const formatDateTime = (date: string | Date) => {
   }
   return 'Invalid Date';
 };
-</script>
 
-<script lang="ts">
-export default {
+definePageMeta({
   layout: 'user-dashboard'
-};
+})
 </script>
-

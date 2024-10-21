@@ -1,7 +1,7 @@
 <template>
   <div class="container p-2 mx-auto sm:p-4 text-gray-100 rounded-md">
     <div class="overflow-x-auto rounded-lg">
-      <table class="min-w-full text-xs">
+      <table class="min-w-full text-sm">
         <colgroup>
           <col>
           <col>

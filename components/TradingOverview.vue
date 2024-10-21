@@ -4,7 +4,7 @@
       Trading Overview
     </h2>
     <div class="overflow-x-auto">
-      <table class="min-w-full text-xs">
+      <table class="min-w-full text-sm">
         <colgroup>
           <col>
           <col>

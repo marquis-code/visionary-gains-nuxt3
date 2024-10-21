@@ -5,7 +5,7 @@
       <p class="text-center">
         A link has been sent to your email. Click on it to verify your account
       </p>
-      <button class="px-6 py-2.5 text-xs text-white bg-green-500 rounded-full border" @click="redirectToLogin">
+      <button class="px-6 py-2.5 text-sm text-white bg-green-500 rounded-full border" @click="redirectToLogin">
         Proceed to login
       </button>
     </div>

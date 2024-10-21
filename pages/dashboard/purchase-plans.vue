@@ -5,7 +5,7 @@
     </p>
     <form class="p-6 space-y-6 z-10" @submit.prevent="buyPlan">
       <div class="space-y-1">
-        <label class="text-xs text-gray-700 font-medium">Choose Plan:*</label>
+        <label class="input-label">Choose Plan:*</label>
         <select v-model="form.plan"
           class="block px-2 text-sm outline-none py-3 rounded-md border w-full border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100">
           <option v-for="(item, index) in [
@@ -23,9 +23,9 @@
         </select>
       </div>
       <div class="space-y-1">
-        <label class="text-xs text-gray-700 font-medium">Enter Amount:*</label>
-        <input v-model="form.amount" class="py-2.5 border rounded-md w-full outline-none pl-6">
-        <span class="text-xs font-medium text-red-500">Note that plan amount must be available in your account balance
+        <label class="input-label">Enter Amount:*</label>
+        <input v-model="form.amount" class="input-field">
+        <span class="text-sm font-medium text-red-500">Note that plan amount must be available in your account balance
           of
           {{ formatNumberAsDollar(userData?.accountBalance) ?? '0.00' }}.</span>
       </div>
@@ -144,9 +144,9 @@ const getUserInfo = async () => {
 </script>
 
 <script lang="ts">
-export default {
+definePageMeta({
   layout: 'user-dashboard'
-};
+})
 </script>
 
 

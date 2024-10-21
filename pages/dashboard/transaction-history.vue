@@ -16,7 +16,7 @@
           <label for="search" class="sr-only">Search</label>
 
           <input v-model="search" type="text" placeholder="Search.."
-            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent">
+            class="input-field">
         </div>
         <b-card class="mt-3">
           <b-table striped show-empty responsive :items="transactionsList" :fields="fields" :busy="loading"

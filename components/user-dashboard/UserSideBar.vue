@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-2/12 h-screen flex-col justify-between bg-black">
     <div class="px-4 py-6 relative">
-      <span class="grid h-10 w-60 place-content-center rounded-lg text-xs text-gray-600">
+      <span class="grid h-10 w-60 place-content-center rounded-lg text-sm text-gray-600">
         <img src="@/assets/img/logo.png" alt="logo" class="w-60">
       </span>
 
@@ -32,7 +32,7 @@
           <img alt="Man" src="@/assets/img/user.svg" class="h-8 w-8 rounded-full border object-cover">
 
           <div>
-            <p class="text-xs">
+            <p class="text-sm">
               <strong class="block font-medium">{{ loggedUser?.firstName ?? "" }}
                 {{ loggedUser?.lastName ?? "" }}</strong>
 

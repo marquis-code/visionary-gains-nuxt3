@@ -30,7 +30,7 @@
         <div class="flex justify-center items-center pb-3">
           <button
             class="group flex items-center justify-between gap-4 rounded-lg border border-indigo-600 bg-red-500 px-5 py-2 transition-colors hover:bg-transparent focus:outline-none focus:ring"
-            @click="handleLogout"
+            @click="logOut"
           >
             <span
               class="font-medium text-white transition-colors group-hover:text-indigo-600 group-active:text-indigo-500"
@@ -66,7 +66,7 @@
           >
 
           <div>
-            <p class="text-xs">
+            <p class="text-sm">
               <strong class="block font-medium">Eric Frusciante</strong>
 
               <span> eric@frusciante.com </span>
@@ -125,7 +125,7 @@
               SubNine
             </h2>
             <span class="flex items-center space-x-1">
-              <a rel="noopener noreferrer" href="#" class="text-xs hover:underline dark:text-gray-400">View profile</a>
+              <a rel="noopener noreferrer" href="#" class="text-sm hover:underline dark:text-gray-400">View profile</a>
             </span>
           </div>
         </div>
@@ -175,9 +175,10 @@
 </template>
 
 <script setup lang="ts">
+import { logOut } from '@/composables/core/useLogout'
 import { ref, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+// import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 const router = useRouter();
 const route = useRoute();
@@ -233,26 +234,6 @@ const toggleMobileNavbar = () => {
 
 const toggleNavbar = () => {
   showMobile.value = !showMobile.value;
-};
-
-const handleLogout = () => {
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, logout!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.localStorage.removeItem('user');
-      window.localStorage.removeItem('auth');
-      router.push('/admin');
-    } else {
-      Swal.fire('Cancelled', "You're still logged in!", 'info');
-    }
-  });
 };
 
 watch(

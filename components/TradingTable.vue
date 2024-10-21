@@ -1,7 +1,7 @@
 <template>
   <div class="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-100 bg-black">
     <div class="overflow-x-auto">
-      <table class="min-w-full text-xs">
+      <table class="min-w-full text-sm">
         <thead class="rounded-t-lg bg-black">
           <tr class="text-center">
             <th title="Ranking" class="p-3 text-center border border-white" />

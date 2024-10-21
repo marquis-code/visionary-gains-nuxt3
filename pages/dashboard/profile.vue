@@ -6,35 +6,35 @@
       </p>
       <form class="p-6 lg:p-10 space-y-6" @submit.prevent="updateUser">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">First Name</label>
+          <label class="input-label">First Name</label>
           <input v-model="updatedUserData.firstName" type="text"
-            class="py-2.5 md:py-2 border rounded-md w-full outline-none pl-6 text-sm md:text-base">
-          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
+            class="input-field">
+          <span class="text-sm text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Last Name</label>
+          <label class="input-label">Last Name</label>
           <input v-model="updatedUserData.lastName" type="text"
-            class="py-2.5 md:py-2 text-sm md:text-base border rounded-md w-full outline-none pl-6">
-          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
+            class="input-field">
+          <span class="text-sm text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Email address:</label>
+          <label class="input-label">Email address:</label>
           <input v-model="updatedUserData.email" type="email"
-            class="py-2.5 md:py-2 text-sm md:text-base border rounded-md w-full outline-none pl-6">
-          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
+            class="input-field">
+          <span class="text-sm text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Password:</label>
+          <label class="input-label">Password:</label>
           <input v-model="updatedUserData.password" type="password"
-            class="py-2.5 md:py-2 border rounded-md w-full outline-none pl-6 text-sm md:text-base">
-          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
+            class="input-field">
+          <span class="text-sm text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <!-- <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Wallet Address:</label>
+          <label class="input-label">Wallet Address:</label>
           <input v-model="updatedUserData.walletAddress" type="text" class="py-2 border rounded-md w-full outline-none pl-6">
         </div> -->
         <div class="w-full">
@@ -51,7 +51,7 @@
       </p>
       <div class="p-6 space-y-6">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Means of Identity</label>
+          <label class="input-label">Means of Identity</label>
           <div class="relative">
             <div
               class="h-10 bg-white flex border border-gray-200 rounded items-center"
@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Upload Image</label>
+          <label class="input-label">Upload Image</label>
           <link
             rel="stylesheet"
             href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"
@@ -160,7 +160,7 @@
                     <span class="font-semibold">Click to upload</span> or drag
                     and drop
                   </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
@@ -299,9 +299,9 @@ const getUserInfo = async () => {
 </script>
 
 <script lang="ts">
-export default {
+definePageMeta({
   layout: 'user-dashboard'
-};
+})
 </script>
 
 

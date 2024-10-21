@@ -4,6 +4,7 @@
     <UpdatedNavigationBar />
     <NuxtPage />
     <footer-section />
+    <MarketStats />
     <div id="floating-div" class="fixed bottom-0 left-0 p-2 bg-gray-800 text-white">
       <div
         id="cr-widget-marquee"

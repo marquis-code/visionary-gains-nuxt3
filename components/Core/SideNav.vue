@@ -105,7 +105,7 @@
                     </ul>
                   </li>
                   <li>
-                    <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                    <div class="text-sm font-semibold leading-6 text-gray-400">Your teams</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
                       <li>
                         <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
@@ -143,7 +143,7 @@
       </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 const props = defineProps({
     isOpen: Boolean
 })

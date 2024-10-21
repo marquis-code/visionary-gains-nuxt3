@@ -12,17 +12,17 @@
           <div class="space-y-1 text-sm w-full">
             <label for="token" class="block text-gray-900 font-medium">Token</label>
             <input id="token" v-model="form.resetCode" type="tel" name="token" placeholder="email"
-              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900">
+              class="input-field">
           </div>
           <div class="space-y-1 text-sm w-full">
             <label for="password" class="block text-gray-900 font-medium">New Password</label>
             <input id="password" v-model="form.password" type="password" name="password" placeholder="password"
-              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900">
+              class="input-field">
           </div>
           <div class="w-full">
             <button :disabled="!isFormEmpty" :class="[
           !isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '',
-        ]" class="w-full shrink-0 text-xs disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
+        ]" class="w-full shrink-0 text-sm disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
               {{ processing ? "processing..." : "Submit" }}
             </button>
           </div>
@@ -91,9 +91,9 @@ const login = async () => {
 </script>
 
 <script lang="ts">
-export default {
+definePageMeta({
   layout: 'authLayout'
-};
+})
 </script>
 
 

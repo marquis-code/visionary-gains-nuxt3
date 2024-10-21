@@ -53,7 +53,7 @@
                   <img alt="Man" src="@/assets/img/user.svg" class="h-8 w-8 rounded-full border object-cover">
 
                   <div>
-                    <p class="text-xs text-white">
+                    <p class="text-sm text-white">
                       <strong class="block font-medium text-white">{{ loggedUser?.firstName ?? "" }}
                         {{ loggedUser?.lastName ?? "" }}</strong>
 
@@ -88,7 +88,7 @@
   <h1>Hello</h1>
 </template>
 
-<script>
+<!-- <script>
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 // import 'sweetalert2/src/sweetalert2.scss'
 export default {
@@ -159,7 +159,63 @@ export default {
     }
   }
 }
+</script> -->
+
+<script setup lang="ts">
+import { logOut } from '@/composables/core/useLogout'
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const loggedUser = ref({});
+const router = useRouter();
+
+const sidebarItems = [
+  {
+    name: 'Dashboard',
+    icon: 'analytics',
+    url: '/dashboard',
+  },
+  {
+    name: 'Profile',
+    icon: 'profile',
+    url: '/dashboard/profile',
+  },
+  {
+    name: 'Deposit',
+    icon: 'deposit',
+    url: '/dashboard/deposit',
+  },
+  {
+    name: 'Withdraw',
+    icon: 'deposit',
+    url: '/dashboard/withdrawals',
+  },
+  {
+    name: 'Buy plans',
+    icon: 'investment',
+    url: '/dashboard/purchase-plans',
+  },
+  {
+    name: 'Transaction history',
+    icon: 'history',
+    url: '/dashboard/transaction-history',
+  },
+];
+
+onMounted(() => {
+  const user = JSON.parse(window.localStorage.getItem('user') || '{}');
+  if (!user || Object.keys(user).length === 0) {
+    router.push('/login');
+  } else {
+    loggedUser.value = user;
+  }
+});
 </script>
+
+<template>
+  <!-- Add your template code here -->
+</template>
+
 
 <style scoped>
 .nuxt-link-active {

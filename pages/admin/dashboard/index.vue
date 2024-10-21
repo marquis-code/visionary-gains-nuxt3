@@ -15,7 +15,7 @@
           <h1 class="text-xl font-medium text-white">
             {{ item.count }}
           </h1>
-          <p class="text-xs text-gray-100">
+          <p class="text-sm text-gray-100">
             {{ item.name }}
           </p>
         </div>
@@ -150,7 +150,3 @@ definePageMeta({
   layout: 'dashboards',
 })
 </script>
-
-
-
-<style></style>

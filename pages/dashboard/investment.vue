@@ -5,12 +5,12 @@
         <h2 class="text font-semibold leading-loosed">
           Current Investments
         </h2>
-        <p class="text-gray-600 text-xs">
+        <p class="text-gray-600 text-sm">
           Current Investments
         </p>
       </div>
       <div class="overflow-x-auto h-[410px]">
-        <table class="min-w-full text-xs">
+        <table class="min-w-full text-sm">
           <colgroup>
             <col>
             <col>
@@ -50,7 +50,7 @@
                 <p>{{ amount }}</p>
               </td>
               <td class="p-3 py-4 text-right">
-                <span class="px-3 py-2 font-medium text-xs rounded-md text-white" :class="[status == 'pending' ? 'bg-yellow-500' : 'bg-green-500']">
+                <span class="px-3 py-2 font-medium text-sm rounded-md text-white" :class="[status == 'pending' ? 'bg-yellow-500' : 'bg-green-500']">
                   <span>{{ status }}</span>
                 </span>
               </td>
@@ -231,9 +231,9 @@ const tableHeaders = ref(['invoice', 'client', 'issued', 'due', 'amount', 'statu
 </script>
 
 <script lang="ts">
-export default {
+definePageMeta({
   layout: 'user-dashboard'
-};
+})
 </script>
 
 

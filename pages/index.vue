@@ -5,7 +5,10 @@
       <div>
         <h1 class="text-2xl text-gray-900 font-medium">Latest Trading News</h1>
       </div>
-      <div class="cryptohopper-web-widget" data-id="5" data-news_count="5" data-news_length="10"></div>
+      <!-- <div class="cryptohopper-web-widget" data-id="5" data-news_count="5" data-news_length="10"></div> -->
+      <div class="overflow-x-auto">
+        <CryptoWidgets />
+      </div>
     </div>
     <section class="bg-[#303435]">
       <div class="container max-w-xl p-6 py-12 mx-auto space-y-10 lg:px-8 lg:max-w-7xl">

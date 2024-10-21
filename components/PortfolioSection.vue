@@ -12,7 +12,7 @@
         <div class="relative bg-gradient-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
           <div class="p-4">
             <nuxt-link :to="`/portfolio/${itm.url}`" class="p-4 sm:p-6">
-              <!-- <time datetime="2022-10-10" class="block text-xs text-white/90">
+              <!-- <time datetime="2022-10-10" class="block text-sm text-white/90">
                 Portfolio ({{ idx + 1 }})
               </time> -->
 

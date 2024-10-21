@@ -117,17 +117,17 @@
             <template #cell(actions)="data">
               <div class="py-4">
                 <div v-if="data?.item?.transactionStatus === 'Pending'" class="flex items-center gap-x-3">
-                  <button class="text-white text-xs bg-green-500 w-full py-1.5 rounded-full"
+                  <button class="text-white text-sm bg-green-500 w-full py-1.5 rounded-full"
                     @click="handleAction(data.item, 'approve')">
                     Approve
                   </button>
-                  <button class="text-white text-xs bg-red-500 w-full py-1.5 rounded-full"
+                  <button class="text-white text-sm bg-red-500 w-full py-1.5 rounded-full"
                     @click="handleAction(data.item, 'reject')">
                     Reject
                   </button>
                 </div>
                 <div v-else>
-                  <button disabled class="bg-black text-white py-2 text-xs px-3 rounded-full">
+                  <button disabled class="bg-black text-white py-2 text-sm px-3 rounded-full">
                     Completed
                   </button>
                 </div>
@@ -359,9 +359,13 @@ const processTransaction = async (transactionId: string, status: 'approve' | 're
 const formatNumberAsDollar = (number: number | null | undefined) => {
   return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };
+
+definePageMeta({
+  layout: 'dashboards',
+})
 </script>
 
-<script lang="ts">
+<!-- <script lang="ts">
 export default {
   name: 'WithdrawalList',
   components: {
@@ -370,7 +374,7 @@ export default {
   layout: 'dashboards',
   scrollToTop: true
 };
-</script>
+</script> -->
 
 
 <style scoped>

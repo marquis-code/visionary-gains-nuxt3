@@ -11,14 +11,14 @@
         </p>
         <form class="space-y-10" @submit.prevent="handleForgetPassword">
           <div class="space-y-1 text-sm w-full">
-            <label for="email" class="block text-gray-900 font-medium">Email</label>
+            <label for="email" class="input-label">Email</label>
             <input id="email" v-model="form.email" type="email" name="email" placeholder="email"
-              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900">
+              class="input-field">
           </div>
           <div class="w-full">
             <button :disabled="!isFormEmpty" :class="[
       !isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '',
-    ]" class="w-full shrink-0 text-xs disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
+    ]" class="w-full shrink-0 text-sm disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
               {{ processing ? "processing..." : "Submit" }}
             </button>
           </div>
@@ -94,10 +94,8 @@ const handleForgetPassword = async () => {
     processing.value = false;
   }
 };
-</script>
 
-<script lang="ts">
-export default {
+definePageMeta({
   layout: 'authLayout'
-};
+})
 </script>

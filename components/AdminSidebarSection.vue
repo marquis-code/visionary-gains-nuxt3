@@ -44,7 +44,7 @@
         >
 
         <div>
-          <p class="text-xs">
+          <p class="text-sm">
             <strong class="block font-medium">Michael Smith</strong>
 
             <span>michaelsmith12@gmail.com</span>

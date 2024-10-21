@@ -16,7 +16,7 @@
       </div>
     </section>
     <section class="text-gray-900 body-font bg-white">
-      <div class="container px-5 py-24 mx-auto">
+      <div class="container px-5 py-24 mx-auto space-y-10">
         <div class="flex flex-col text-center w-full">
           <h1 class="text-2xl font-medium title-font mb-4 text-gray-900">
             OUR TEAM
@@ -25,8 +25,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 -m-4">
           <div v-for="(itm, idx) in teams" :key="idx" class="p-4">
             <div class="h-full flex flex-col items-center text-center">
-              <!-- <img alt="team" class="flex-shrink-0 rounded-lg w-full  h-64 object-cover object-center mb-4"
-                :src="require(`@/assets/img/${itm.img}`)"> -->
+              <img alt="team" class="flex-shrink-0 rounded-lg w-full  h-64 object-cover object-center mb-4"
+                :src="itm.img">
               <div class="w-full">
                 <h2 class="title-font font-medium text-lg text-gray-900">
                   {{ itm.name }}
@@ -35,10 +35,10 @@
                   {{ itm.title }}
                 </h3>
                 <div class="flex justify-between items-center mt-6">
-                  <nuxt-link :to="`/teams/${itm.profileUrl}`"
+                  <NuxtLink :to="`/teams/${itm.profileUrl}`"
                     class=" text-white py-2.5 text-sm bg-black px-3 rounded-md">
                     View Profile
-                  </nuxt-link>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -50,31 +50,34 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import executiveDirector from '@/assets/img/ceoFemale.jpeg'
+import investmentManagerOne from '@/assets/img/investment-manager-one.jpeg'
+import investmentManagerTwo from '@/assets/img/investment-manager-two.jpeg'
+import investmentManagerThree from '@/assets/img/investment-director.jpeg'
 
 const teams = ref([
   {
     name: 'Deborah Myers',
     title: 'Executive Director',
-    img: 'ceoFemale.jpeg',
+    img: executiveDirector,
     profileUrl: 'ceo'
   },
   {
     name: 'Breanna Marrie Riley',
     title: 'Investment Manager',
-    img: 'investment-manager-one.jpeg',
+    img: investmentManagerOne,
     profileUrl: 'investment-manager-one'
   },
   {
     name: 'Sonia Ann Lindsey',
     title: 'Investment Manager',
-    img: 'investment-manager-two.jpeg',
+    img: investmentManagerTwo,
     profileUrl: 'investment-manager-two'
   },
   {
     name: 'Adam Lehan Thomson',
     title: 'Investment Director',
-    img: 'investment-director.jpeg',
+    img: investmentManagerThree,
     profileUrl: 'investment-director'
   }
 ]);

@@ -6,7 +6,7 @@
           Overview
         </h1>
         <button type="button" class="px-3 py-2 rounded-full text-white bg-black"
-          @click="$bvModal.show('update-profit-modal')">
+          @click="updateProfitModal = true">
           Update profit
         </button>
       </div>
@@ -39,20 +39,20 @@
         <loader v-for="itm in 3" :key="itm" />
       </div>
     </main>
-    <b-modal id="wallet-update" hide-footer centered hide-header>
+    <CoreModal id="wallet-update" @update:show="updateWalletModal = $event" :show="updateWalletModal">
       <div class="flex justify-center items-center">
         <h1 class="text-lg font-semibold text-black">
           {{ Object.keys(selectedWallet).length ? `Update ${selectedWallet?.walletName} wallet` : 'Update Wallet' }}
         </h1>
       </div>
-      <form class="mt-8 gap-6 w-full space-y-6 px-6 pb-6" @submit.prevent="updateWallet">
+      <form class="mt-8 gap-6 w-full space-y-6" @submit.prevent="updateWallet">
         <div class="col-span-6 sm:col-span-6">
           <label for="walletName" class="block text-sm font-medium text-gray-700">
             Wallet Name
           </label>
 
           <select id="walletName" v-model="selectedWallet.value" disabled readonly
-            class="mt-1 disabled: cursor-not-allowed bg-gray-100 w-full px-3 py-3 border outline-none rounded-md border-gray-200 text-sm text-gray-700 shadow-sm">
+            class="mt-1 disabled:cursor-not-allowed bg-gray-100 w-full px-3 py-3 border outline-none rounded-md border-gray-200 text-sm text-gray-700 shadow-sm">
             <option value="btc">
               BitCoin
             </option>
@@ -76,25 +76,25 @@
 
         <div class="w-full flex justify-between items-center gap-x-4">
           <button type="button"
-            class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring "
-            @click="$bvModal.hide('wallet-update')">
+            class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring "
+            @click="updateWalletModal = false">
             Cancel
           </button>
           <button type="submit" :disabled="!isFormEmpty || processing"
-            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
+            class="w-full rounded-md border text-sm disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
             {{ processing ? 'saving...' : `Update ${selectedWallet.name} wallet` }}
           </button>
         </div>
       </form>
-    </b-modal>
+    </CoreModal>
 
-    <b-modal id="update-profit-modal" hide-footer centered hide-header>
+    <CoreModal id="update-profit-modal" @update:show="updateProfitModal = $event" :show="updateProfitModal">
       <div class="flex justify-center items-center">
         <h1 class="text-lg font-semibold text-black">
           Update Profit Form
         </h1>
       </div>
-      <form class="mt-8 gap-6 w-full space-y-6 px-6 pb-6" @submit.prevent="handleProfitUpdate">
+      <form class="mt-8 gap-6 w-full space-y-6" @submit.prevent="handleProfitUpdate">
         <div class="col-span-6 sm:col-span-6">
           <label for="status" class="block text-sm font-medium text-gray-700">
             Profit Status
@@ -122,17 +122,17 @@
 
         <div class="w-full flex justify-between items-center gap-x-4">
           <button type="button"
-            class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring "
-            @click="$bvModal.hide('update-profit-modal')">
+            class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring "
+            @click="updateProfitModal = false">
             Cancel
           </button>
           <button type="submit" :disabled="!isUpdateFormEmpty || processingProfitUpdate"
-            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
+            class="w-full rounded-md border text-sm disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
             {{ processing ? 'saving...' : 'Update profit' }}
           </button>
         </div>
       </form>
-    </b-modal>
+    </CoreModal>
   </main>
 </template>
 
@@ -141,6 +141,9 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+const updateProfitModal = ref(false)
+const updateWalletModal = ref(false)
 
 const loading = ref(false);
 const showModal = ref(false);
@@ -203,7 +206,7 @@ const handleClick = () => {
 
 const handleWalletModal = (item: any) => {
   selectedWallet.value = item;
-  showModal.value = true; // Adjust as per your modal display logic
+  updateWalletModal.value = true; // Adjust as per your modal display logic
 };
 
 const updateWallet = async () => {
@@ -384,12 +387,9 @@ const getUserInfo = async () => {
 const formatNumberAsDollar = (number: number | null | undefined) => {
   return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };
-</script>
-
-<script lang="ts">
-export default {
-  layout: 'dashboards'
-};
+definePageMeta({
+  layout: 'dashboards',
+})
 </script>
 
 

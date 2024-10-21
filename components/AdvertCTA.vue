@@ -22,11 +22,11 @@
 
         <div class="mt-4 sm:mt-8 flex items-center gap-x-5">
           <nuxt-link to="/plans"
-            class="inline-block text-xs  rounded-full bg-indigo-600 px-10 py-3 lg:text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
+            class="inline-block text-sm  rounded-full bg-indigo-600 px-10 py-3 lg:text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
             Choose A Plan
           </nuxt-link>
           <nuxt-link to="/signup"
-            class="inline-block text-xs  rounded-full bg-indigo-600 px-10 py-3 lg:text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
+            class="inline-block text-sm  rounded-full bg-indigo-600 px-10 py-3 lg:text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
             Sign Up
           </nuxt-link>
         </div>
@@ -34,12 +34,6 @@
     </div>
   </section>
 </template>
-
-<script>
-export default {
-
-}
-</script>
 
 <style>
 .tinted-image {

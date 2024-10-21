@@ -16,7 +16,7 @@
           <input v-model="search" type="text" placeholder="Search.."
             class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent">
         </div>
-        <b-card class="mt-3">
+        <CoreModal class="mt-3">
           <b-table striped show-empty responsive :items="filteredUsers" :fields="fields" :busy="loading"
             :current-page="currentPage" :per-page="perPage">
             <template #table-busy>
@@ -131,10 +131,10 @@
           <div class="flex justify-end items-end">
             <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" size="md" class="my-3" />
           </div>
-        </b-card>
+        </CoreModal>
       </section>
     </Transition>
-    <b-modal id="updateUserInfo" hide-footer centered hide-header>
+    <CoreModal @update:show="showUpdateUserInfo = $event" id="updateUserInfo" :show="showUpdateUserInfo">
       <div class="flex justify-center items-center">
         <h1 class="text-lg font-semibold text-black">
           Update Information
@@ -147,7 +147,7 @@
           </label>
 
           <input id="profit" v-model="selectedUser.profit" type="number" step="0.01" min="0" name="profit"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+            class="input-field">
         </div>
 
         <div class="col-span-6 sm:col-span-6">
@@ -156,7 +156,7 @@
           </label>
 
           <input id="tradingBalance" v-model="selectedUser.tradingBalance" type="number" name="tradingBalance"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+            class="input-field">
         </div>
 
         <div class="col-span-6 sm:col-span-6">
@@ -166,7 +166,7 @@
 
           <input id="accountBalance" v-model="selectedUser.accountBalance" type="number" step="0.01" min="0"
             name="accountBalance"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+            class="input-field">
         </div>
 
         <div class="w-full pt-10">
@@ -175,7 +175,7 @@
             processing ? 'processing' : 'Submit' }}</button>
         </div>
       </form>
-    </b-modal>
+    </CoreModal>
   </main>
 </template>
 
@@ -184,6 +184,8 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+const showUpdateUserInfo = ref(false)
 
 const selectedUser = ref<any>({});
 const usersList = ref<any[]>([]);
@@ -433,6 +435,10 @@ export default {
     };
   }
 };
+
+definePageMeta({
+  layout: 'dashboards',
+})
 </script>
 
 

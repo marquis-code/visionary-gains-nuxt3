@@ -9,7 +9,7 @@
           <div class="flex items-center gap-x-2">
             <h1 class="text-white text-3xl font-semibold">
               1.82937456
-            </h1> <span class="block  bg-[#5CC5F7] px-3 py-1 rounded-md font-medium text-xs">BTC</span>
+            </h1> <span class="block  bg-[#5CC5F7] px-3 py-1 rounded-md font-medium text-sm">BTC</span>
           </div>
           <p class="text-gray-500">
             $20,974.23
@@ -76,7 +76,7 @@
                 <h1 class="text-sm">
                   {{ n.name }}
                 </h1>
-                <p class="text-xs text-gray-500">
+                <p class="text-sm text-gray-500">
                   {{ n.action }}
                 </p>
               </div>
@@ -86,7 +86,7 @@
               <h1 class="text-sm">
                 {{ n.amount }}
               </h1>
-              <p class="text-xs text-gray-500">
+              <p class="text-sm text-gray-500">
                 {{ n.duration }}
               </p>
             </div>

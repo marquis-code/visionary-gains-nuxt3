@@ -7,19 +7,19 @@
         </h1>
         <form class="space-y-10 w-full bg-white" @submit.prevent="login">
           <div class="space-y-1 text-sm w-full">
-            <label for="email" class="block dark:text-gray-400">Email</label>
+            <label for="email" class="input-label">Email</label>
             <input id="email" v-model="form.email" type="email" name="email" placeholder="email"
-              class="border w-full px-4 py-3 rounded-md outline-none">
+              class="input-field">
             <small v-if="!isEmailValid" class="text-red-600 text-sm font-medium">Please enter a valid email
               address</small>
           </div>
           <div class="space-y-1 text-sm w-full">
-            <label for="password" class="block dark:text-gray-400">Password</label>
+            <label for="password" class="input-label">Password</label>
             <input id="password" v-model="form.password" type="password" name="password" placeholder="Password"
-              class="border w-full px-4 py-3 rounded-md outline-none">
+              class="input-field">
           </div>
           <button :disabled="!isFormEmpty || processing"
-            class="block w-full disabled:cursor-not-allowed disabled:opacity-25 p-3 text-sm text-center  bg-black text-white rounded-md">
+            class="block w-full disabled:cursor-not-allowed disabled:opacity-25 p-3 py-3.5  text-center  bg-black text-white rounded-md">
             {{ processing ? 'processing...' : 'Sign in' }}
           </button>
         </form>
@@ -112,8 +112,8 @@ const login = async () => {
 </script>
 
 <script lang="ts">
-export default {
+definePageMeta({
   layout: 'authLayout'
-};
+})
 </script>
 

@@ -322,6 +322,10 @@ export default {
     };
   }
 };
+
+definePageMeta({
+  layout: 'dashboards',
+})
 </script>
 
 

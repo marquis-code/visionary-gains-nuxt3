@@ -6,14 +6,14 @@
       </p>
       <form class="p-6 space-y-6" @submit.prevent="handleWithdrawal">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Amount</label>
+          <label class="input-label">Amount</label>
           <input v-model="form.amount" placeholder="Enter amount in USD" type="number"
-            class="py-3 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+            class="input-field">
         </div>
         <div class="space-y-4">
-          <label class="text-xs text-gray-700 font-medium">Withdrawal Type</label>
+          <label class="input-label">Withdrawal Type</label>
           <select v-model="form.withdrawalType"
-            class="py-3 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+            class="input-field">
             <option value="" disabled>
               ---- Select withdrawal type -----
             </option>
@@ -28,13 +28,13 @@
             </option>
           </select>
           <!-- <div class="space-y-1">
-            <label class="text-xs text-gray-700 font-medium">Wallet address</label>
+            <label class="input-label">Wallet address</label>
             <input readonly :value="computedWalletAddress" class="py-2.5 bg-gray-100 cursor-not-allowed border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
           </div> -->
           <div class="space-y-1">
-            <label class="text-xs text-gray-700 font-medium">Wallet address</label>
+            <label class="input-label">Wallet address</label>
             <input v-model="form.wallet"
-              class="py-3 bg-gray-50 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+              class="input-field">
           </div>
           <div class="w-full pt-6">
             <button :disabled="!isFormEnabled || processing"

@@ -9,6 +9,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  css: [
+    '@/assets/css/main.css', // Tailwind CSS
+    '@/assets/css/custom.css',   // Your custom styles
+  ],
   plugins: ["~/plugins/aos.client.ts"],
   nitro: {
     prerender: {
@@ -18,6 +22,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  // css: [
+  //   'vue-multiselect/dist/vue-multiselect.css'
+  // ],
   modules: ['@kevinmarrec/nuxt-pwa'],
   pwa: {
     workbox: {

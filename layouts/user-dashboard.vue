@@ -18,15 +18,15 @@ export default {
   components: {
     // UserHeaderSection
   },
-  mounted() {
-    const user = window.localStorage.getItem('user')
+  // mounted() {
+  //   const user = window.localStorage.getItem('user')
 
-    if (user) {
-      const result = JSON.parse(user)
-    }
-    if (user === null) {
-      this.$router.push('/login')
-    }
-  }
+  //   if (user) {
+  //     const result = JSON.parse(user)
+  //   }
+  //   if (user === null) {
+  //     this.$router.push('/login')
+  //   }
+  // }
 }
 </script>

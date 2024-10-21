@@ -13,7 +13,7 @@
         <div v-for="{ name, code } in computed_wallet_info" :key="name"
           class="flex items-center justify-between w-full gap-x-6" v-if="code">
           <div class="space-y-1 w-full">
-            <label class="text-xs text-gray-700 font-medium">{{ name }}</label>
+            <label class="input-label">{{ name }}</label>
             <input ref="myinput" readonly :value="code"
               class="py-3 border rounded-md w-full outline-none pl-6 text-sm font-light"
               @focus="$event.target.select()">
@@ -30,19 +30,19 @@
       <api-loader v-else />
     </section>
     <section class="bg-white lg:w-5/12 rounded-md border">
-      <p class="border-b text-sm font-semibold py-4 pl-6">
+      <p class="border-b text-lg font-semibold py-4 pl-6">
         Enter amount and upload proof of payment
       </p>
       <form class="p-6 space-y-6" @submit.prevent="handleDeposit">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Deposit Amount</label>
+          <label class="input-label">Deposit Amount</label>
           <input v-model="form.amount" placeholder="Enter amount in USD" type="number"
-            class="py-3 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+            class="input-field">
         </div>
         <div class="space-y-4">
-          <label class="text-xs text-gray-700 font-medium">Deposit Type</label>
+          <label class="input-label">Deposit Type</label>
           <select v-model="form.depositType"
-            class="py-3 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+            class="input-field">
             <option value="" disabled>
               ---- Select deposit type -----
             </option>
@@ -51,12 +51,12 @@
             </option>
           </select>
           <div class="space-y-1">
-            <label class="text-xs text-gray-700 font-medium">Wallet address</label>
+            <label class="input-label">Wallet address</label>
             <input readonly :value="computedWalletAddress"
-              class="py-3 bg-gray-100 cursor-not-allowed border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+              class="input-field">
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-gray-700 font-medium">Upload Image</label>
+            <label class="input-label">Upload Image</label>
             <div v-if="!imagePreview" class="max-w-2xl mx-auto">
               <div class="flex items-center justify-center w-full">
                 <label for="dropzone-file"
@@ -69,7 +69,7 @@
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
                         upload</span> or drag and drop</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                   </div>
                   <input id="dropzone-file" type="file" class="hidden" @change="handleProofUpload">
                 </label>
@@ -79,9 +79,9 @@
               <img :src="imagePreview" alt="image preview" class="w-full h-32 object-cover object-center">
             </div>
           </div>
-          <div class="w-full">
+          <div class="w-full pt-6">
             <button :disabled="!isFormEnabled || processing"
-              class="w-full text-white disabled:cursor-not-allowed disabled:opacity-25  bg-black py-3 px-3 rounded-md">
+              class="w-full text-white disabled:cursor-not-allowed disabled:opacity-25  bg-black py-3.5 px-3 rounded-md">
               {{ processing ? 'processing..' : 'Submit' }}
             </button>
           </div>
@@ -279,8 +279,8 @@ const populateDepositArray = (data: any) => {
 </script>
 
 <script lang="ts">
-export default {
+definePageMeta({
   layout: 'user-dashboard'
-};
+})
 </script>
 

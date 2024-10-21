@@ -98,6 +98,10 @@ const createWallet = () => {
     router.push('/admin/dashboard/wallet');
   }, 3000);
 };
+
+definePageMeta({
+  layout: 'dashboards',
+})
 </script>
 
 <script lang="ts">
