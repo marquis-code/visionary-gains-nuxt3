@@ -18,7 +18,7 @@
             <input id="password" v-model="form.password" type="password" name="password" placeholder="Password"
               class="input-field">
           </div>
-          <button :disabled="!isFormEmpty || processing"
+          <button :disabled="processing"
             class="block w-full disabled:cursor-not-allowed disabled:opacity-25 p-3 py-3.5  text-center  bg-black text-white rounded-md">
             {{ processing ? 'processing...' : 'Sign in' }}
           </button>
@@ -29,10 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+definePageMeta({
+  layout: 'authLayout'
+})
 
 const processing = ref(false);
 const isEmailValid = ref(true);
@@ -109,11 +112,5 @@ const login = async () => {
     processing.value = false;
   }
 };
-</script>
-
-<script lang="ts">
-definePageMeta({
-  layout: 'authLayout'
-})
 </script>
 
