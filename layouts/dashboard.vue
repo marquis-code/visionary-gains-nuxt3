@@ -168,7 +168,7 @@
         </div>
       </div>
       <div class="p-6 h-screen bg-black overflow-y-auto">
-        <slot />
+        <slot></slot>
       </div>
     </div>
   </main>

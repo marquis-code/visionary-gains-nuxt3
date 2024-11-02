@@ -6,7 +6,7 @@
         <user-header />
       </div>
       <div class="md:p-3 md:border-[0.4px] md:shadow-md md:bg-[#232323] h-screen md:rounded-lg m-3 z-0">
-        <slot />
+        <slot></slot>
       </div>
     </div>
   </main>

@@ -243,7 +243,7 @@ const updateWallet = async () => {
       };
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql/query', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -287,7 +287,7 @@ const fetchAdminStats = async () => {
     `;
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql/query', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -318,7 +318,7 @@ const handleProfitUpdate = async () => {
     `;
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql/query', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -364,7 +364,7 @@ const getUserInfo = async () => {
     `;
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql/query', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

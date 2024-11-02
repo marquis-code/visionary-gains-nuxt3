@@ -295,7 +295,7 @@ const fetchUsers = async () => {
     `;
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql/query', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -342,7 +342,7 @@ const updateUserInfo = async () => {
     `;
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql/query', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

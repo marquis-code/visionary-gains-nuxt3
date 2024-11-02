@@ -44,7 +44,7 @@ export const useLogin = () => {
     `;
 
     try {
-      const response = await fetch('https://api.visionarygains.com/graphql', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

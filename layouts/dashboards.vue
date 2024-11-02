@@ -128,7 +128,7 @@
         </div>
       </div>
       <div class="p-6 h-screen md:bg-[#232323] overflow-y-auto">
-        <slot />
+        <slot></slot>
       </div>
     </div>
   </main>
