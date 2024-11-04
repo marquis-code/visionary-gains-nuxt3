@@ -30,8 +30,8 @@ export const useLogin = () => {
             firstName
             lastName
             email
-            status
-            planType
+            Status
+            PlanType
             accountBalance
             tradingBalance
             profit
@@ -44,7 +44,7 @@ export const useLogin = () => {
     `;
 
     try {
-      const response = await fetch('https://visionary-zpui.onrender.com/graphql', {
+      const response = await fetch('https://visionary-zpui.onrender.com/graphql/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -86,16 +86,7 @@ export default {
           icon: 'history',
           url: '/dashboard/transaction-history'
         }
-        // {
-        //   name: 'Investment',
-        //   icon: 'dashboard',
-        //   url: '/dashboard/investment'
-        // }
-        // {
-        //   name: 'Withdrawn',
-        //   icon: 'withdraw.png',
-        //   url: '/dashboard/withdraw'
-        // }
+    
       ]
     }
   },

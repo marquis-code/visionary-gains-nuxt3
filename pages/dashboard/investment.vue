@@ -232,7 +232,7 @@ const tableHeaders = ref(['invoice', 'client', 'issued', 'due', 'amount', 'statu
 
 <script lang="ts">
 definePageMeta({
-  layout: 'user-dashboard'
+  layout: 'updated-user-dashboard'
 })
 </script>
 

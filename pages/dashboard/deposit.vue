@@ -2,35 +2,37 @@
   <main class="lg:flex justify-start items-start gap-x-10 space-y-10 lg:space-y-0">
     <section class="bg-white lg:w-7/12 rounded-md border">
       <div class="border-b pl-6 py-4 text-sm font-semibold">
-        <h1 class="text-lg text-gray-600">
+        <h1 class="text-sm text-gray-600">
           Fund Your Account
         </h1>
-        <p class="text-gray-500 text-sm font-light">
+        <p class="text-gray-500 text-xs font-light">
           copy wallet address of your intended payment method
         </p>
       </div>
-      <div v-if="!loadingAdminInfo" class="p-10 space-y-6">
-        <div v-for="{ name, code } in computed_wallet_info" :key="name"
-          class="flex items-center justify-between w-full gap-x-6" v-if="code">
-          <div class="space-y-1 w-full">
-            <label class="input-label">{{ name }}</label>
-            <input ref="myinput" readonly :value="code"
-              class="py-3 border rounded-md w-full outline-none pl-6 text-sm font-light"
-              @focus="$event.target.select()">
-          </div>
-          <div class="flex justify-center items-center pt-7" v-if="code">
-            <img src="@/assets/img/copy.png" class="h-4 w-4 py cursor-pointer" alt="" @click="copy(code)">
-          </div>
-        </div>
+
+      <div class="p-6 space-y-6">
+        <div v-for="(value, key) in adminData?.admin" :key="key"
+     class="flex items-center justify-between w-full gap-x-6">
+  <div class="space-y-1 w-full">
+    <label class="input-label">{{ key.toUpperCase() }}</label>
+    <input ref="myinput" readonly :value="value"
+           class="py-3 border rounded-md w-full outline-none pl-6 text-sm font-light"
+           @focus="$event.target.select()">
+  </div>
+  <div class="flex justify-center items-center pt-7">
+    <img src="@/assets/img/copy.png" class="h-4 w-4 py cursor-pointer" alt="" @click="copy(value)">
+  </div>
+</div>
+
         <div class="">
-          <a href="http://bitcoin.com/" target="_blank" class="bg-black px-6 m-6 py-2.5 rounded-md text-white">Buy
+          <a href="http://bitcoin.com/" target="_blank" class="bg-black text-sm px-6  mt-5 py-3 rounded-md text-white">Buy
             Crypto</a>
         </div>
       </div>
-      <api-loader v-else />
+      <!-- <api-loader v-else /> -->
     </section>
     <section class="bg-white lg:w-5/12 rounded-md border">
-      <p class="border-b text-lg font-semibold py-4 pl-6">
+      <p class="border-b text- font- py-4 pl-6">
         Enter amount and upload proof of payment
       </p>
       <form class="p-6 space-y-6" @submit.prevent="handleDeposit">
@@ -40,6 +42,7 @@
             class="input-field">
         </div>
         <div class="space-y-4">
+         <div>
           <label class="input-label">Deposit Type</label>
           <select v-model="form.depositType"
             class="input-field">
@@ -50,12 +53,13 @@
               {{ itm.name }}
             </option>
           </select>
-          <div class="space-y-1">
+         </div>
+          <div class="">
             <label class="input-label">Wallet address</label>
             <input readonly :value="computedWalletAddress"
               class="input-field">
           </div>
-          <div class="space-y-1">
+          <div class="">
             <label class="input-label">Upload Image</label>
             <div v-if="!imagePreview" class="max-w-2xl mx-auto">
               <div class="flex items-center justify-center w-full">
@@ -115,6 +119,10 @@ const computedWalletAddress = computed(() => {
 });
 
 const isFormEnabled = computed(() => !!(form.value.amount && form.value.depositType && form.value.proof));
+
+definePageMeta({
+  layout: 'updated-user-dashboard'
+})
 
 const computedWalletInfo = computed(() => {
   if (Object.keys(adminData.value).length) {
@@ -216,6 +224,21 @@ const handleDeposit = async () => {
   }
 };
 
+const populateDepositArray = (data: any) => {
+  console.log(data, 'populated fdata')
+  if (data.admin?.btc?.length) {
+    depositTypeArray.value.push({ name: 'Bitcoin', key: 'bitcoin' });
+  }
+
+  if (data.admin?.eth?.length) {
+    depositTypeArray.value.push({ name: 'Ethereum', key: 'ethereum' });
+  }
+
+  if (data?.admin?.bank?.length) {
+    depositTypeArray.value.push({ name: 'Bank', key: 'bank' });
+  }
+};
+
 const getAdminInfo = async () => {
   loadingAdminInfo.value = true;
   const accessToken = JSON.parse(window.localStorage.getItem('auth') || '""');
@@ -252,6 +275,7 @@ const getAdminInfo = async () => {
       body: JSON.stringify({ query })
     });
     const data = await response.json();
+    loadingAdminInfo.value = false;
     if (data?.errors) {
       window.$toastr?.e(data.errors[0].message);
     } else {
@@ -263,24 +287,5 @@ const getAdminInfo = async () => {
   }
 };
 
-const populateDepositArray = (data: any) => {
-  if (data.admin?.btc?.length) {
-    depositTypeArray.value.push({ name: 'Bitcoin', key: 'bitcoin' });
-  }
-
-  if (data.admin?.eth?.length) {
-    depositTypeArray.value.push({ name: 'Ethereum', key: 'ethereum' });
-  }
-
-  if (data?.admin?.bank?.length) {
-    depositTypeArray.value.push({ name: 'Bank', key: 'bank' });
-  }
-};
-</script>
-
-<script lang="ts">
-definePageMeta({
-  layout: 'user-dashboard'
-})
 </script>
 

@@ -2,107 +2,117 @@
   <main>
     <Transition name="fade">
       <!-- <b-container> -->
-      <section class="text-white">
-        <div class="flex items-center justify-between my-3">
-          <button class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm" @click="goBack()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none"
-              stroke="#747070" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel">
-              <path d="M19 12H6M12 5l-7 7 7 7" />
-            </svg>
-          </button>
-        </div>
-
-        <div class="sm:flex-1 pb-0 mt-3">
+      <section class="t">
+        <!-- <div class="sm:flex-1 pb-0 mt-3">
           <label for="search" class="sr-only">Search</label>
 
           <input v-model="search" type="text" placeholder="Search.."
             class="input-field">
-        </div>
-        <b-card class="mt-3">
-          <b-table striped show-empty responsive :items="transactionsList" :fields="fields" :busy="loading"
-            :current-page="currentPage" :per-page="perPage">
-            <template #table-busy>
-              <div class="text-center my-2 cursor-pointer">
-                <b-spinner class="align-middle" />
-                <small>Loading...</small>
-              </div>
-            </template>
-
-            <template #empty>
-              <p class="text-center text-sm text-secondary py-2 cursor-pointer">
-                {{
-            search
-              ? `No Transactions found for search value: "${search}"`
-              : "No Transactions available"
-          }}
-              </p>
-            </template>
-
-            <template #cell(sn)="data">
-              <div class="py-4">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{ data.index + 1 }}</span>
-              </div>
-            </template>
-
-            <template #cell(amount)="data">
-              <div class="py-4">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-            formatNumberAsDollar(data?.item?.amount)
-          }}
-                </span>
-              </div>
-            </template>
-
-            <template #cell(wallet)="data">
-              <div class="py-4">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-            data?.item?.wallet }}</span>
-              </div>
-            </template>
-
-            <template #cell(transactionType)="data">
-              <div class="py-4">
-                <span class="font-medium py-2 text-sm">
-                  {{ data?.item?.transactionType }}</span>
-              </div>
-            </template>
-
-            <template #cell(transactionStatus)="data">
-              <div class="py-4">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-            data?.item?.transactionStatus }}</span>
-              </div>
-            </template>
-
-            <template #cell(proof)="data">
-              <div class="py-4">
-                <span v-if="data?.item?.proof" class="font-medium py-2 text-sm">
-                  <enlargeable-image :src="data.item.proof" class="z-50" animation_duration="700">
-                    <img class="h-10 w-10 rounded-full" alt="" :src="data?.item?.proof">
-                  </enlargeable-image>
-                </span>
-                <span v-else>N/A</span>
-              </div>
-            </template>
-
-            <template #cell(timeAdded)="data">
-              <div class="py-4">
-                <span class="font-medium py-2 text-sm">{{ formatDateTime(data?.item?.timeAdded) }}</span>
-              </div>
-            </template>
-          </b-table>
-
-          <div class="flex justify-end items-end">
-            <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" size="md" class="my-3" />
+        </div>-->
+        <div class>
+          <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-base font-semibold text-gray-900">Transactions</h1>
+              <p
+                class="mt-2 text-sm text-gray-700"
+              >A list of all the transactions in.</p>
+            </div>
           </div>
-        </b-card>
-        <!-- </div> -->
+          <div v-if="transactionsList.length && !loading" class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          scope="col"
+                          class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                        >Amount</th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >Wallet</th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >Transaction Type</th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >Transaction Status</th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >Proof</th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >Date</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                      <tr v-for="(item, idx) in transactionsList" :key="idx">
+                        <td
+                          class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+                        >
+                          {{
+                            formatNumberAsDollar(item?.amount)
+                          }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {{
+                            item?.wallet
+                          }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >{{ item?.transactionType }}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {{
+                            item?.transactionStatus
+                          }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <div class="py-4">
+                            <span v-if="item?.proof" class="font-medium py-2 text-sm">
+                              <enlargeable-image
+                                :src="item.proof"
+                                class="z-50"
+                                animation_duration="700"
+                              >
+                                <img class="h-10 w-10 rounded-full" alt :src="item?.proof" />
+                              </enlargeable-image>
+                            </span>
+                            <span v-else>N/A</span>
+                          </div>
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >{{ formatDateTime(item?.timeAdded) }}</td>
+                        <td
+                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+                        >
+                          <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                            Edit
+                            <span class="sr-only">, Lindsay Walton</span>
+                          </a>
+                        </td>
+                      </tr>
+
+                      <!-- More people... -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <loader v-else-if="loading && !transactionsList.length" />
+          <p v-else class="text-center font-medium py-20 border-[0.5px] rounded-lg border-gray-100 mt-6">
+            No Transactions Available
+          </p>
+        </div>
       </section>
-      <!-- </b-container> -->
     </Transition>
   </main>
 </template>
@@ -111,44 +121,11 @@
 import { ref, onMounted, computed } from 'vue';
 import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 
+definePageMeta({
+  layout: 'updated-user-dashboard'
+})
+
 const transactionsList = ref<any[]>([]);
-const fields = ref([
-  {
-    key: 'sn',
-    label: 'S/N',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'amount',
-    label: 'Amount',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'wallet',
-    label: 'Wallet',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'transactionType',
-    label: 'Transaction Type',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'transactionStatus',
-    label: 'Transaction Status',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'proof',
-    label: 'Proof',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'timeAdded',
-    label: 'Date',
-    class: 'font-medium text-gray-400 text-sm'
-  }
-]);
 
 const currentPage = ref(1);
 const perPage = ref(6);
@@ -235,6 +212,8 @@ const formatNumberAsDollar = (number: number | null | undefined) => {
 const goBack = () => {
   window.history.back();
 };
+
+
 </script>
 
 <script lang="ts">
@@ -246,6 +225,7 @@ export default {
   layout: 'user-dashboard',
   scrollToTop: true
 };
+
 </script>
 
 

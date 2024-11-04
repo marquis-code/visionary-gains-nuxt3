@@ -7,7 +7,7 @@
       <div class="space-y-1">
         <label class="input-label">Choose Plan:*</label>
         <select v-model="form.plan"
-          class="block px-2 text-sm outline-none py-3 rounded-md border w-full border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100">
+          class="input-field">
           <option v-for="(item, index) in [
       {
         name: 'Platinum Plan (29%) Monthly',
@@ -145,7 +145,7 @@ const getUserInfo = async () => {
 
 <script lang="ts">
 definePageMeta({
-  layout: 'user-dashboard'
+  layout: 'updated-user-dashboard'
 })
 </script>
 

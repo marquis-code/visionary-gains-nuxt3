@@ -99,11 +99,7 @@
             </div> -->
 
             <div class="w-full pt-6">
-              <button :disabled="!isFormEmpty" :class="[
-            !isFormEmpty
-              ? 'opacity-25 cursor-not-allowed'
-              : '',
-          ]" class="inline-block w-full shrink-0 text-sm rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
+              <button class="inline-block w-full shrink-0 text-sm rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
                 {{ formBusy ? "processing..." : " Create an account" }}
               </button>
 

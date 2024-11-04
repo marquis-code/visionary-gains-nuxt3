@@ -11,7 +11,8 @@
             class="input-field">
         </div>
         <div class="space-y-4">
-          <label class="input-label">Withdrawal Type</label>
+      <div>
+        <label class="input-label">Withdrawal Type</label>
           <select v-model="form.withdrawalType"
             class="input-field">
             <option value="" disabled>
@@ -27,6 +28,7 @@
               Bank Account
             </option>
           </select>
+      </div>
           <!-- <div class="space-y-1">
             <label class="input-label">Wallet address</label>
             <input readonly :value="computedWalletAddress" class="py-2.5 bg-gray-100 cursor-not-allowed border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
@@ -195,10 +197,9 @@ const getAdminInfo = async () => {
 </script>
 
 <script lang="ts">
-export default {
-  components: { ApiLoader },
-  layout: 'user-dashboard'
-};
+definePageMeta({
+  layout: 'updated-user-dashboard'
+})
 </script>
 
 

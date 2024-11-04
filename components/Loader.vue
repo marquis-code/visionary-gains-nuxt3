@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full">
-    <div class="rounded overflow-hidden border shadow-lg animate-pulse w-full">
-      <div class="bg-gray-300 h-28" />
+  <div class="w-full mt-3">
+    <div class="rounded overflow-hidden border-[0.5px]  animate-pulse w-full">
+      <div class="bg-gray-100 h-28" />
     </div>
   </div>
 </template>

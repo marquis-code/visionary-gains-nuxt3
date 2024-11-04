@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <main>
     <Transition name="fade">
       <section class="text-white">
@@ -177,6 +177,117 @@
       </form>
     </CoreModal>
   </main>
+</template> -->
+
+<template>
+  <div class="bg-white rounded-lg">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold text-gray-900">Users</h1>
+        <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+      </div>
+      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flow-root overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <table class="w-full text-left">
+        <thead class="bg-white">
+          <tr>
+            <th scope="col" class="relative isolate py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
+              User
+              <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-b-gray-200"></div>
+              <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-b-gray-200"></div>
+            </th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Plan Type</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">Account Balance</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Trading Balance</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Profit</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ethereum</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Bitcoin</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Action</th>
+            
+            <th scope="col" class="relative py-3.5 pl-3">
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in filteredUsers" :key="index">
+            <td class="relative py-4 pr-3 text-sm font-medium text-gray-900">
+              {{
+            item?.firstName
+          }}
+              <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100"></div>
+              <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
+            </td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+              {{
+              item?.lastName
+            }}
+            </td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+              {{
+              item?.email
+            }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              {{ item?.planType ?? 'N/A' }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              {{
+            formatNumberAsDollar(item?.accountBalance) ?? 'N/A' }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              {{ formatNumberAsDollar(item?.tradingBalance) ?? 'N/A' }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              {{
+            formatNumberAsDollar(item?.profit) ?? 'N/A'
+          }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              <div class="font-medium py-4 text-sm">
+                <span v-if="item.eth" class="font-medium py-4 text-sm">
+                  {{ item.eth }}
+                </span>
+                <span v-else>N/A</span>
+              </div>
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              <div class="font-medium py-4 text-sm">
+                <span v-if="item.btc" class="font-medium py-4 text-sm">
+                  {{ item.btc }}
+                </span>
+                <span v-else>N/A</span>
+              </div>
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              <span
+                  :class="[item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']"
+                  class="px-3 py-2">
+                  {{
+            item?.Status }}
+                </span>
+            </td>
+
+            <td class="relative py-4 pl-3 text-right text-sm font-medium">
+              <div class="font-medium text-sm cursor-pointer px-3 py-4">
+                <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10"
+                  @click="handleClick(item)">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 </template>
 
 <script setup lang="ts">
@@ -190,58 +301,6 @@ const showUpdateUserInfo = ref(false)
 const selectedUser = ref<any>({});
 const usersList = ref<any[]>([]);
 const processing = ref(false);
-const fields = ref([
-  {
-    key: 'sn',
-    label: 'S/N',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'user',
-    label: 'User',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'planType',
-    label: 'Plan Type',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'accountBalance',
-    label: 'Account Balance',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'tradingBalance',
-    label: 'Trading Balance',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'profit',
-    label: 'Profit',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'eth',
-    label: 'Ethereum',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'btc',
-    label: 'Bitcoin',
-    class: 'font-medium text-end text-gray-400'
-  },
-  {
-    key: 'status',
-    label: 'Status',
-    class: 'font-medium text-gray-400 text-sm'
-  },
-  {
-    key: 'action',
-    label: 'Action',
-    class: ''
-  }
-]);
 
 const currentPage = ref(1);
 const perPage = ref(6);
