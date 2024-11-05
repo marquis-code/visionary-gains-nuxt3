@@ -81,7 +81,7 @@
             Cancel
           </button>
           <button type="submit" :disabled="!isFormEmpty || processing"
-            class="w-full rounded-md border text-sm disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
+            class="w-full rounded-md border text-sm disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition  focus:outline-none focus:ring">
             {{ processing ? 'saving...' : `Update ${selectedWallet.name} wallet` }}
           </button>
         </div>
@@ -127,7 +127,7 @@
             Cancel
           </button>
           <button type="submit" :disabled="!isUpdateFormEmpty || processingProfitUpdate"
-            class="w-full rounded-md border text-sm disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
+            class="w-full rounded-md border text-sm disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition  focus:outline-none focus:ring">
             {{ processing ? 'saving...' : 'Update profit' }}
           </button>
         </div>
@@ -262,6 +262,7 @@ const updateWallet = async () => {
         window.$toastr?.e(data.errors[0].message);
       } else {
         window.$toastr?.s(`${selectedWallet.value.name} wallet address was successfully updated`);
+        updateWalletModal.value = false
         showModal.value = false; // Adjust as per your modal display logic
       }
     } finally {
@@ -331,6 +332,7 @@ const handleProfitUpdate = async () => {
         window.$toastr?.e(data.errors[0].message);
       } else {
         updateProfitStatus.value = data.data.updateProfits;
+        updateProfitModal.value = false
       }
     } finally {
       processingProfitUpdate.value = false;
@@ -388,7 +390,7 @@ const formatNumberAsDollar = (number: number | null | undefined) => {
   return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };
 definePageMeta({
-  layout: 'dashboards',
+  layout: 'updated-admin-dashboard',
 })
 </script>
 

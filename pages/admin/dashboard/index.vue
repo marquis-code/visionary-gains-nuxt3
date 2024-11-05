@@ -1,6 +1,23 @@
 <template>
   <main class="space-y-10">
-    <div>
+    <div class="bg-gray-900 rounded-lg">
+  <div class="mx-auto max-w-7xl">
+    <div class="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-4">
+      <div v-for="(item, index) in computedStats" :key="index" class="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
+        <p class="text-sm/6 font-medium text-gray-400">{{ item.name }}</p>
+        <p class="mt-2 flex items-baseline gap-x-2">
+          <span class="text-4xl font-semibold tracking-tight text-white">{{ item.count }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <TradingViewTable />
+    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_68d44" width="100%" height="400"
+      frameborder="0" allowfullscreen></iframe>
+
+    <!-- <div>
       <h1 class="text-white font-medium">
         Statistics
       </h1>
@@ -9,7 +26,6 @@
       <div v-for="(item, index) in computedStats" :key="index"
         class="h-32 rounded-lg bg-black flex items-center gap-x-3 pl-6">
         <div :class="item.classStyle" class="rounded-full h-10 w-10 flex justify-center items-center">
-          <!-- <img :src="require(`~/assets/icons/${item.icon}.svg`)" alt="stat icon"> -->
         </div>
         <div>
           <h1 class="text-xl font-medium text-white">
@@ -55,8 +71,7 @@
         </div>
         <graph-4 />
       </div>
-    </div>
-    <!-- <graph-4 /> -->
+    </div> -->
   </main>
 </template>
 
@@ -147,6 +162,6 @@ const formatNumberAsDollar = (number: number | null | undefined) => {
 onMounted(fetchAdminStats);
 
 definePageMeta({
-  layout: 'dashboards',
+  layout: 'updated-admin-dashboard',
 })
 </script>

@@ -1,158 +1,227 @@
 <template>
   <main>
-    <Transition name="fade">
-      <section class="text-white">
-        <div class="flex items-center justify-between my-3">
-          <button class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm" @click="goBack()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none"
-              stroke="#747070" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel">
-              <path d="M19 12H6M12 5l-7 7 7 7" />
-            </svg>
-          </button>
-        </div>
-        <div class="sm:flex-1 pb-0 mt-3">
-          <label for="search" class="sr-only">Search</label>
-
-          <input v-model="search" type="text" placeholder="Search.."
-            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent">
-        </div>
-        <b-card class="mt-3">
-          <b-table striped show-empty responsive :items="filteredWithdrawals" :fields="fields" :busy="loading"
-            :current-page="currentPage" :per-page="perPage">
-            <template #table-busy>
-              <div class="text-center my-2 cursor-pointer">
-                <b-spinner class="align-middle" />
-                <small>Loading...</small>
-              </div>
-            </template>
-
-            <template #empty>
-              <p class="text-center text-sm text-secondary py-2 cursor-pointer">
-                {{
-            search
-              ? `No Transactions found for search value: "${search}"`
-              : "No Transactions available"
-          }}
+    <div class="">
+          <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-base font-semibold text-gray-900">Withdrawals</h1>
+              <p class="mt-2 text-sm text-gray-700">
+                A list of all withdrawals.
               </p>
-            </template>
-
-            <template #cell(sn)="data">
-              <div class="font-medium py-4 text-sm cursor-pointer">
-                {{ data.index + 1 }}
-              </div>
-            </template>
-
-            <template #cell(amount)="data">
-              <div class="font-medium py-4 text-sm cursor-pointer">
-                {{
-            formatNumberAsDollar(data?.item?.amount) ?? 'N/A'
-          }}
-              </div>
-            </template>
-
-            <template #cell(wallet)="data">
-              <div class="font-medium py-4 text-sm cursor-pointer">
-                {{
-            data?.item?.wallet ?? 'N/A' }}
-              </div>
-            </template>
-
-            <!-- <template #cell(transactionType)="data">
-              <div class="font-medium py-4 text-sm">
-                {{ data?.item?.transactionType ?? 'N/A' }}
-              </div>
-            </template> -->
-
-            <template #cell(transactionStatus)="data">
-              <div class="font-medium py-4 text-sm cursor-pointer">
-                <span class="px-3 py-2 rounded-full text-sm"
-                  :class="[data?.item?.transactionStatus === 'Pending' ? 'bg-yellow-500 text-white' : data?.item?.transactionStatus === 'Approved' ? 'text-white bg-green-500' : data?.item?.transactionStatus === 'Declined' ? 'text-white bg-red-500' : '']">
-                  {{
-            data?.item?.transactionStatus ?? 'N/A' }}
-                </span>
-              </div>
-            </template>
-            <template #cell(user)="data">
-              <div class="font-medium text-sm cursor-pointer flex items-center gap-x-2 py-4">
-                <div class="bg-gray-500 text-white rounded-full h-10 w-10 flex text-center justify-center items-center">
-                  {{ getInitials(data?.item?.user?.firstName, data?.item?.user?.lastName) }}
-                </div>
-                <div>
-                  <span>
-                    {{
-            data?.item?.user?.firstName
-          }}
-                  </span>
-                  <span>
-                    {{
-              data?.item?.user?.lastName
-            }}
-                  </span><br>
-                  <span>
-                    {{
-              data?.item?.user?.email
-            }}
-                  </span>
-                </div>
-              </div>
-            </template>
-
-            <template #cell(proof)="data">
-              <div class="font-medium py-4 text-sm">
-                <span v-if="data?.item?.proof" class="font-medium py-2 text-sm">
-                  <enlargeable-image :src="data.item.proof" class="z-50" animation_duration="700">
-                    <img class="h-10 w-10 rounded-full" alt="" :src="data?.item?.proof">
-                  </enlargeable-image>
-                </span>
-                <span v-else>N/A</span>
-              </div>
-            </template>
-
-            <template #cell(timeAdded)="data">
-              <div class="font-medium py-4 text-sm">
-                {{ formatDateTime(data?.item?.timeAdded) ?? 'N/A' }}
-              </div>
-            </template>
-
-            <template #cell(actions)="data">
-              <div class="py-4">
-                <div v-if="data?.item?.transactionStatus === 'Pending'" class="flex items-center gap-x-3">
-                  <button class="text-white text-sm bg-green-500 w-full py-1.5 rounded-full"
-                    @click="handleAction(data.item, 'approve')">
-                    Approve
-                  </button>
-                  <button class="text-white text-sm bg-red-500 w-full py-1.5 rounded-full"
-                    @click="handleAction(data.item, 'reject')">
-                    Reject
-                  </button>
-                </div>
-                <div v-else>
-                  <button disabled class="bg-black text-white py-2 text-sm px-3 rounded-full">
-                    Completed
-                  </button>
-                </div>
-              </div>
-            </template>
-          </b-table>
-
-          <div class="flex justify-end items-end">
-            <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" size="md" class="my-3" />
+            </div>
+  
           </div>
-        </b-card>
-        <!-- </div> -->
-      </section>
-      <!-- </b-container> -->
-    </Transition>
+          <div v-if="!loading && transactionsList?.length" class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div
+                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
+              >
+                <div
+                  class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg"
+                >
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          scope="col"
+                          class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                        >
+                          User
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Amount
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Wallet
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Staus
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Proof
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Date
+                        </th>
+                        <th
+                          scope="col"
+                          class="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                        >
+                          <span class="sr-only">Edit</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                      <tr v-for="(item, index) in filteredWithdrawals" :key="index">
+                        <td
+                          class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+                        >
+                          {{ formatNumberAsDollar(item?.amount) ?? "N/A" }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >
+                          {{ item?.wallet ?? "N/A" }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >
+                          <span
+                            class="px-3 py-2 rounded-full text-sm"
+                            :class="[
+                              item?.transactionStatus === 'Pending'
+                                ? 'bg-yellow-500 text-white'
+                                : item?.transactionStatus === 'Approved'
+                                ? 'text-white bg-green-500'
+                                : item?.transactionStatus === 'Declined'
+                                ? 'text-white bg-red-500'
+                                : '',
+                            ]"
+                          >
+                            {{ item?.transactionStatus ?? "N/A" }}
+                          </span>
+                        </td>
+                        <td
+                          class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+                        >
+                          <div
+                            class="font-medium text-sm cursor-pointer flex items-center gap-x-2 py-4"
+                          >
+                            <div
+                              class="bg-gray-500 text-white rounded-full h-10 w-10 flex text-center justify-center items-center"
+                            >
+                              {{
+                                getInitials(
+                                  item?.user?.firstName,
+                                  item?.user?.lastName
+                                )
+                              }}
+                            </div>
+                            <div>
+                              <span>
+                                {{ item?.user?.firstName }}
+                              </span>
+                              <span>
+                                {{ item?.user?.lastName }} </span
+                              ><br />
+                              <span>
+                                {{ item?.user?.email }}
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >
+                          {{ formatDateTime(data?.item?.timeAdded) ?? "N/A" }}
+                        </td>
+                        <td
+                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+                        >
+                        <button
+                    @click="toggleDropdown(index)"
+                    class="inline-flex items-center text-sm font-medium text-[#667185] hover:text-black"
+                  >
+                    <svg
+                      width="48"
+                      height="44"
+                      viewBox="0 0 48 44"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M21.9966 22H22.0041"
+                        stroke="#292929"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M27 22H27.0075"
+                        stroke="#1D2739"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M17 22H17.0075"
+                        stroke="#1D2739"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                          <div v-if="activeDropdown === index"
+                          class="absolute -top-2 right-10 z-50 mt-2 w-60 bg-white border border-gray-200 rounded-md shadow-lg">
+                        <div v-if="item?.transactionStatus === 'Pending'" class="flex items-center gap-x-3">
+                          <button class="text-white text-sm bg-green-500 w-full py-1.5 rounded-full"
+                            @click="handleAction(                                                              item, 'approve')">
+                            Approve
+                          </button>
+                          <button class="text-white text-sm bg-red-500 w-full py-1.5 rounded-full"
+                            @click="handleAction(                                                              item, 'reject')">
+                            Reject
+                          </button>
+                        </div>
+                        <div v-else>
+                          <button disabled class="bg-black text-white py-2 text-sm px-3 rounded-full">
+                            Completed
+                          </button>
+                        </div>
+              </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <loader v-else-if="loading && !transactionsList.length" />
+      <p v-else class="text-center font-medium py-20 border-[0.5px] rounded-lg text-gray-900 border-gray-100 mt-6">
+        No Withdrawal Transactions Available
+      </p>
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 const router = useRouter();
+
+const activeDropdown = ref<number | null>(null);
+
+const toggleDropdown = (index: number) => {
+  if (activeDropdown.value === index) {
+    activeDropdown.value = null;
+  } else {
+    activeDropdown.value = index;
+  }
+};
+
+// Function to close the dropdown
+const closeDropdown = () => {
+  activeDropdown.value = null;
+};
 
 const transactionsList = ref<any[]>([]);
 const fields = ref([
@@ -361,20 +430,9 @@ const formatNumberAsDollar = (number: number | null | undefined) => {
 };
 
 definePageMeta({
-  layout: 'dashboards',
+  layout: 'updated-admin-dashboard',
 })
 </script>
-
-<!-- <script lang="ts">
-export default {
-  name: 'WithdrawalList',
-  components: {
-    EnlargeableImage
-  },
-  layout: 'dashboards',
-  scrollToTop: true
-};
-</script> -->
 
 
 <style scoped>

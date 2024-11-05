@@ -76,13 +76,14 @@
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           <div class="py-4">
                             <span v-if="item?.proof" class="font-medium py-2 text-sm">
-                              <enlargeable-image
+                              <img class="h-10 w-10 rounded-full" :src="item?.proof" />
+                              <!-- <enlargeable-image
                                 :src="item.proof"
                                 class="z-50"
                                 animation_duration="700"
                               >
                                 <img class="h-10 w-10 rounded-full" alt :src="item?.proof" />
-                              </enlargeable-image>
+                              </enlargeable-image> -->
                             </span>
                             <span v-else>N/A</span>
                           </div>
@@ -90,14 +91,6 @@
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                         >{{ formatDateTime(item?.timeAdded) }}</td>
-                        <td
-                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
-                        >
-                          <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                            Edit
-                            <span class="sr-only">, Lindsay Walton</span>
-                          </a>
-                        </td>
                       </tr>
 
                       <!-- More people... -->
@@ -135,8 +128,9 @@ const totalRows = ref(1);
 const loading = ref(false);
 
 onMounted(() => {
+  console.log('hello world')
   fetchTransactions();
-  totalRows.value = transactionsList.value.length;
+  // totalRows.value = transactionsList.value.length;
 });
 
 const fetchTransactions = async () => {
@@ -179,7 +173,9 @@ const fetchTransactions = async () => {
       },
       body: JSON.stringify({ query })
     });
+    console.log(response, 'response')
     const data = await response.json();
+    console.log(data, 'transactions dara here')
     if (data?.errors) {
       window.$toastr?.e(data.errors[0].message);
     } else {
@@ -211,19 +207,6 @@ const formatNumberAsDollar = (number: number | null | undefined) => {
 
 const goBack = () => {
   window.history.back();
-};
-
-
-</script>
-
-<script lang="ts">
-export default {
-  name: 'Objective',
-  components: {
-    EnlargeableImage
-  },
-  layout: 'user-dashboard',
-  scrollToTop: true
 };
 
 </script>

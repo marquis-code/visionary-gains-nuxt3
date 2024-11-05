@@ -1,146 +1,122 @@
-<!-- <template>
-  <main>
-    <Transition name="fade">
-      <section class="text-white">
-        <div class="flex items-center justify-between my-3">
-          <button class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm" @click="goBack()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none"
-              stroke="#747070" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel">
-              <path d="M19 12H6M12 5l-7 7 7 7" />
-            </svg>
-          </button>
-        </div>
-        <div class="sm:flex-1 pb-0 mt-3">
-          <label for="search" class="sr-only">Search</label>
-
-          <input v-model="search" type="text" placeholder="Search.."
-            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent">
-        </div>
-        <CoreModal class="mt-3">
-          <b-table striped show-empty responsive :items="filteredUsers" :fields="fields" :busy="loading"
-            :current-page="currentPage" :per-page="perPage">
-            <template #table-busy>
-              <div class="text-center my-2 cursor-pointer">
-                <b-spinner class="align-middle" />
-                <small>Loading...</small>
-              </div>
-            </template>
-
-            <template #empty>
-              <p class="text-center text-sm text-secondary py-4 cursor-pointer">
-                {{
-            search
-              ? `No User found for search value: "${search}"`
-              : "No Users available"
-          }}
-              </p>
-            </template>
-
-            <template #cell(sn)="data">
-              <div class="font-medium py-4 text-sm cursor-pointer">
-                {{ data.index + 1 }}
-              </div>
-            </template>
-
-            <template #cell(user)="data">
-              <div class="font-medium text-sm cursor-pointer flex items-center gap-x-2 py-4">
-                <div class="bg-gray-500 text-white rounded-full h-10 w-10 flex text-center justify-center items-center">
-                  {{ getInitials(data?.item?.firstName, data?.item?.lastName) }}
-                </div>
-                <div>
-                  <span>
-                    {{
-            data?.item?.firstName
-          }}
-                  </span>
-                  <span>
-                    {{
-              data?.item?.lastName
+<template>
+<main>
+  <div class="bg-white rounded-lg">
+  <div class="mx-auto max-w-7xl">
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold text-gray-900">Users</h1>
+        <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flow-root overflow-hidden">
+    <div class="mx-auto max-w-7xl">
+      <table class="w-full text-left">
+        <thead class="bg-white">
+          <tr>
+            <th scope="col" class="relative isolate py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
+              User
+              <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-b-gray-200"></div>
+              <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-b-gray-200"></div>
+            </th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">Account Balance</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Trading Balance</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Profit</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ethereum</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Bitcoin</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+            
+            <th scope="col" class="relative py-3.5 pl-3">
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in filteredUsers" :key="index">
+            <td class="relative py-4 pr-3 text-sm font-medium text-gray-900">
+              <div
+                            class="font-medium text-sm cursor-pointer flex items-center gap-x-2 py-4"
+                          >
+                            <div
+                              class="bg-gray-500 text-white rounded-full h-10 w-10 flex text-center justify-center items-center"
+                            >
+                              {{
+                                getInitials(
+                                  item?.firstName,
+                                  item?.lastName
+                                )
+                              }}
+                            </div>
+                            <div>
+                              <span>
+                                {{ item?.firstName }}
+                              </span>
+                              <span>
+                                {{ item?.lastName }} </span
+                              ><br />
+                              <span>
+                                {{ item?.email }}
+                              </span>
+                            </div>
+                          </div>
+            </td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+              {{
+              item?.accountBalance || 'Nil'
             }}
-                  </span><br>
-                  <span>
-                    {{
-              data?.item?.email
-            }}
-                  </span>
-                </div>
-              </div>
-            </template>
-            <template #cell(planType)="data">
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              {{
+            formatNumberAsDollar(item?.accountBalance) ?? 'N/A' }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
+              {{ formatNumberAsDollar(item?.tradingBalance) ?? 'N/A' }}
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
               <div class="font-medium py-4 text-sm">
-                {{ data?.item?.planType ?? 'N/A' }}
-              </div>
-            </template>
-
-            <template #cell(accountBalance)="data">
-              <div class="font-medium py-4 text-sm cursor-pointer">
-                {{
-            formatNumberAsDollar(data?.item?.accountBalance) ?? 'N/A' }}
-              </div>
-            </template>
-
-            <template #cell(tradingBalance)="data">
-              <div class="font-medium py-4 text-sm">
-                {{ formatNumberAsDollar(data?.item?.tradingBalance) ?? 'N/A' }}
-              </div>
-            </template>
-
-            <template #cell(profit)="data">
-              <div class="font-medium py-4 text-sm">
-                {{
-            formatNumberAsDollar(data?.item?.profit) ?? 'N/A'
-          }}
-              </div>
-            </template>
-
-            <template #cell(eth)="data">
-              <div class="font-medium py-4 text-sm">
-                <span v-if="data.item.eth" class="font-medium py-4 text-sm">
-                  {{ data.item.eth }}
+                <span v-if="item.eth" class="font-medium py-4 text-sm">
+                  {{ item.eth }}
                 </span>
                 <span v-else>N/A</span>
               </div>
-            </template>
-            <template #cell(btc)="data">
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">
               <div class="font-medium py-4 text-sm">
-                <span v-if="data.item.btc" class="font-medium py-4 text-sm">
-                  {{ data.item.btc }}
+                <span v-if="item.btc" class="font-medium py-4 text-sm">
+                  {{ item.btc }}
                 </span>
                 <span v-else>N/A</span>
               </div>
-            </template>
-
-            <template #cell(status)="data">
-              <div class="font-medium text-sm cursor-pointer px-3 py-4">
-                <span
-                  :class="[data?.item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']"
-                  class="px-3 py-2">
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500 text-xs">
+              <span
+                  :class="[item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']"
+                  class="px-3 py-1">
                   {{
-            data?.item?.Status }}
+            item?.Status }}
                 </span>
-              </div>
-            </template>
-            <template #cell(action)="data">
-              <div class="font-medium text-sm cursor-pointer px-3 py-4">
-                <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10"
-                  @click="handleClick(data.item)">
-              </div>
-            </template>
-          </b-table>
+            </td>
 
-          <div class="flex justify-end items-end">
-            <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" size="md" class="my-3" />
-          </div>
-        </CoreModal>
-      </section>
-    </Transition>
-    <CoreModal @update:show="showUpdateUserInfo = $event" id="updateUserInfo" :show="showUpdateUserInfo">
+            <td class="relative py-4 pl-3 text-right text-sm font-medium">
+              <button @click="handleClick(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                <!-- <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10"> -->
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<CoreModal @update:show="showUpdateUserInfo = $event" id="updateUserInfo" :show="showUpdateUserInfo">
       <div class="flex justify-center items-center">
         <h1 class="text-lg font-semibold text-black">
           Update Information
         </h1>
       </div>
-      <form class="gap-6 w-full space-y-6 px-6 pb-6" @submit.prevent="updateUserInfo">
+      <form class="gap-6 w-full space-y-6" @submit.prevent="updateUserInfo">
         <div class="col-span-6 sm:col-span-6">
           <label for="profit" class="block text-sm font-medium text-gray-700">
             Profit
@@ -171,128 +147,21 @@
 
         <div class="w-full pt-10">
           <button :disabled="processing" type="submit"
-            class="bg-black disabled:cursor-not-allowed disabled:opacity-25 w-full text-white py-2.5 rounded-md">{{
+            class="bg-black disabled:cursor-not-allowed disabled:opacity-25 w-full text-white py-3.5 rounded-md">{{
             processing ? 'processing' : 'Submit' }}</button>
         </div>
       </form>
     </CoreModal>
-  </main>
-</template> -->
-
-<template>
-  <div class="bg-white rounded-lg">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold text-gray-900">Users</h1>
-        <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
-      </div>
-      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</button>
-      </div>
-    </div>
-  </div>
-  <div class="mt-8 flow-root overflow-hidden">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <table class="w-full text-left">
-        <thead class="bg-white">
-          <tr>
-            <th scope="col" class="relative isolate py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
-              User
-              <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-b-gray-200"></div>
-              <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-b-gray-200"></div>
-            </th>
-            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Plan Type</th>
-            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">Account Balance</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Trading Balance</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Profit</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ethereum</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Bitcoin</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Action</th>
-            
-            <th scope="col" class="relative py-3.5 pl-3">
-              <span class="sr-only">Edit</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in filteredUsers" :key="index">
-            <td class="relative py-4 pr-3 text-sm font-medium text-gray-900">
-              {{
-            item?.firstName
-          }}
-              <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100"></div>
-              <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
-            </td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-              {{
-              item?.lastName
-            }}
-            </td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
-              {{
-              item?.email
-            }}
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              {{ item?.planType ?? 'N/A' }}
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              {{
-            formatNumberAsDollar(item?.accountBalance) ?? 'N/A' }}
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              {{ formatNumberAsDollar(item?.tradingBalance) ?? 'N/A' }}
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              {{
-            formatNumberAsDollar(item?.profit) ?? 'N/A'
-          }}
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              <div class="font-medium py-4 text-sm">
-                <span v-if="item.eth" class="font-medium py-4 text-sm">
-                  {{ item.eth }}
-                </span>
-                <span v-else>N/A</span>
-              </div>
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              <div class="font-medium py-4 text-sm">
-                <span v-if="item.btc" class="font-medium py-4 text-sm">
-                  {{ item.btc }}
-                </span>
-                <span v-else>N/A</span>
-              </div>
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              <span
-                  :class="[item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']"
-                  class="px-3 py-2">
-                  {{
-            item?.Status }}
-                </span>
-            </td>
-
-            <td class="relative py-4 pl-3 text-right text-sm font-medium">
-              <div class="font-medium text-sm cursor-pointer px-3 py-4">
-                <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10"
-                  @click="handleClick(item)">
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
+</main>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+
+definePageMeta({
+  layout: 'updated-admin-dashboard',
+})
 
 const router = useRouter();
 
@@ -382,7 +251,9 @@ const getInitials = (firstName: string, lastName: string) => {
 };
 
 const handleClick = (data: any) => {
+  console.log(data, 'data jhere')
   selectedUser.value = data;
+  showUpdateUserInfo.value = true
   showModal.value = true; // Adjust according to how the modal is displayed
 };
 
@@ -435,69 +306,7 @@ const updateUserInfo = async () => {
 const formatNumberAsDollar = (number: number | null | undefined) => {
   return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };
-</script>
 
-<script lang="ts">
-export default {
-  name: 'UsersList',
-  layout: 'dashboards',
-  scrollToTop: true,
-  head() {
-    return {
-      meta: [
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: this.title
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: this.description
-        },
-        {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: this.image
-        },
-        {
-          hid: 'twitter:image:alt',
-          name: 'twitter:image:alt',
-          content: this.title
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: this.title
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: this.description
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.image
-        },
-        {
-          hid: 'og:image:secure_url',
-          property: 'og:image:secure_url',
-          content: this.image
-        },
-        {
-          hid: 'og:image:alt',
-          property: 'og:image:alt',
-          content: this.title
-        }
-      ]
-    };
-  }
-};
-
-definePageMeta({
-  layout: 'dashboards',
-})
 </script>
 
 
@@ -519,3 +328,4 @@ definePageMeta({
   transform: scale(0.8);
 }
 </style>
+

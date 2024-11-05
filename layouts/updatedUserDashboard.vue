@@ -99,13 +99,20 @@
               </li>
       
               <li class="mt-auto">
-                <a @click="handleLogout" href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                <!-- <a @click="logOut" href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
                   <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   </svg>
                   Logout
-                </a>
+                </a> -->
+                <button @click="logOut" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-[#737791]">
+                          <svg class="h-6 w-6" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M19.7741 20.2009L24.3365 14.8775C24.5544 14.629 24.6659 14.3152 24.666 13.9998C24.6661 13.784 24.6141 13.5674 24.5085 13.3704C24.4615 13.2826 24.4041 13.1992 24.3365 13.1221L19.7741 7.7987C19.2949 7.23957 18.4532 7.17478 17.8941 7.65398C17.3349 8.13317 17.2702 8.9749 17.7494 9.53403L20.4339 12.6664L10.1077 12.6664C9.37134 12.6664 8.77438 13.2633 8.77438 13.9997C8.77438 14.7361 9.37134 15.333 10.1077 15.333L20.4341 15.333L17.7494 18.4655C17.2702 19.0247 17.3349 19.8664 17.8941 20.3456C18.4532 20.8248 19.2949 20.76 19.7741 20.2009ZM11.3327 5.99967C12.0691 5.99967 12.666 6.59663 12.666 7.33301L12.666 9.33301C12.666 10.0694 13.263 10.6663 13.9993 10.6663C14.7357 10.6663 15.3327 10.0694 15.3327 9.33301L15.3327 7.33301C15.3327 5.12387 13.5418 3.33301 11.3327 3.33301L7.33268 3.33301C5.12354 3.33301 3.33268 5.12387 3.33268 7.33301L3.33268 20.6663C3.33268 22.8755 5.12354 24.6663 7.33268 24.6663L11.3327 24.6663C13.5418 24.6663 15.3327 22.8755 15.3327 20.6663L15.3327 18.6663C15.3327 17.93 14.7357 17.333 13.9993 17.333C13.263 17.333 12.666 17.93 12.666 18.6663L12.666 20.6663C12.666 21.4027 12.0691 21.9997 11.3327 21.9997L7.33268 21.9997C6.5963 21.9997 5.99935 21.4027 5.99935 20.6663L5.99935 7.33301C5.99935 6.59663 6.5963 5.99967 7.33268 5.99967L11.3327 5.99967Z" fill="#737791"/>
+                              </svg>
+                              
+                        Sign Out
+                      </button>
               </li>
             </ul>
           </nav>
@@ -180,13 +187,20 @@
           </li>
       
           <li class="mt-auto">
-            <a to="/" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+            <button @click="logOut" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-[#737791]">
+                          <svg class="h-6 w-6" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M19.7741 20.2009L24.3365 14.8775C24.5544 14.629 24.6659 14.3152 24.666 13.9998C24.6661 13.784 24.6141 13.5674 24.5085 13.3704C24.4615 13.2826 24.4041 13.1992 24.3365 13.1221L19.7741 7.7987C19.2949 7.23957 18.4532 7.17478 17.8941 7.65398C17.3349 8.13317 17.2702 8.9749 17.7494 9.53403L20.4339 12.6664L10.1077 12.6664C9.37134 12.6664 8.77438 13.2633 8.77438 13.9997C8.77438 14.7361 9.37134 15.333 10.1077 15.333L20.4341 15.333L17.7494 18.4655C17.2702 19.0247 17.3349 19.8664 17.8941 20.3456C18.4532 20.8248 19.2949 20.76 19.7741 20.2009ZM11.3327 5.99967C12.0691 5.99967 12.666 6.59663 12.666 7.33301L12.666 9.33301C12.666 10.0694 13.263 10.6663 13.9993 10.6663C14.7357 10.6663 15.3327 10.0694 15.3327 9.33301L15.3327 7.33301C15.3327 5.12387 13.5418 3.33301 11.3327 3.33301L7.33268 3.33301C5.12354 3.33301 3.33268 5.12387 3.33268 7.33301L3.33268 20.6663C3.33268 22.8755 5.12354 24.6663 7.33268 24.6663L11.3327 24.6663C13.5418 24.6663 15.3327 22.8755 15.3327 20.6663L15.3327 18.6663C15.3327 17.93 14.7357 17.333 13.9993 17.333C13.263 17.333 12.666 17.93 12.666 18.6663L12.666 20.6663C12.666 21.4027 12.0691 21.9997 11.3327 21.9997L7.33268 21.9997C6.5963 21.9997 5.99935 21.4027 5.99935 20.6663L5.99935 7.33301C5.99935 6.59663 6.5963 5.99967 7.33268 5.99967L11.3327 5.99967Z" fill="#737791"/>
+                              </svg>
+                              
+                        Sign Out
+                      </button>
+            <!-- <a to="/" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
               <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
               Logout
-            </a>
+            </a> -->
           </li>
         </ul>
       </nav>
@@ -206,7 +220,7 @@
       <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"></div>
 
       <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        <form class="relative flex flex-1" action="#" method="GET">
+        <form class="relative sr-only flex flex-1" action="#" method="GET">
           <label for="search-field" class="sr-only">Search</label>
           <svg class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
             <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
@@ -214,12 +228,12 @@
           <input id="search-field" class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Search..." type="search" name="search">
         </form>
         <div class="flex items-center gap-x-4 lg:gap-x-6">
-          <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+          <!-- <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
             <span class="sr-only">View notifications</span>
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
             </svg>
-          </button>
+          </button> -->
 
           <!-- Separator -->
           <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"></div>
@@ -260,7 +274,7 @@
 </template>
 
 <script setup lang="ts">
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import Swal from "sweetalert2";
 const openNav = ref(false)
 const router = useRouter()
 const loggedUser = ref({})
@@ -297,6 +311,26 @@ const loggedUser = ref({})
   console.log('hello')
   openNav.value = false
  }
+
+ const logOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Logout",
+      cancelButtonText: "Nah, Just kidding",
+    }).then((result) => {
+      if (result.value) {
+        localStorage.clear();
+        router.push({ path: "/", query: { page: "login" } });
+      } else {
+        Swal.fire("Cancelled", "Action was cancelled", "info");
+      }
+    });
+  };
 </script>
 
 <style scoped>

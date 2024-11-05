@@ -100,17 +100,7 @@ const createWallet = () => {
 };
 
 definePageMeta({
-  layout: 'dashboards',
+  layout: 'updated-admin-dashboard',
 })
 </script>
 
-<script lang="ts">
-export default {
-  layout: 'dashboards'
-};
-</script>
-
-
-<style>
-
-</style>
